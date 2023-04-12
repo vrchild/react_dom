@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浏览器的历史纪录</title>
+</head>
+<body>
+    <a href="http://www.baidu.com" onclick="return push('/test')">push path</a><br />
+    <button onclick="push('test1')">push test1</button><br />
+    <button onclick="replace('test2')">replace test2</button><br />
+    <button onclick="back()">《=回退</button><br />
+    <button onclick="forword()">前进=》</button><br />
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/history/4.7.2/history.js"></script>
+    <script>
+        /*浏览器的历史记录是栈的结构，前进，后退，替换等*/
+        /*路由是{key: value} 的形式，key是path，value是组件*/
+        let history = History.createBrowserHistory() // 方法一： 直接使用H5推出的history身上的API
+        // let history = History.createHashHistory() // 方法二： hash值（锚点）
+
+        function push(path) {
+            history.push(path)
+            return false
+        }
+        function replace(path) {
+            history.replace(path)
+        }
+        function back() {
+            history.goBack()
+        }
+        function forword() {
+            history.goForward()
+        }
+        history.listen(local => {
+            console.log('请求路由发生变化', local)
+        })
+    </script>
+</body>
+</html>

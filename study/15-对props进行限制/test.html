@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="test"></div>
+    <div id="test1"></div>
+    <div id="test2"></div>
+
+    <script type="text/javascript" src="../js/react.development.js" ></script>
+    <script type="text/javascript" src="../js/react-dom.development.js" ></script>
+    <script type="text/javascript" src="../js/babel.min.js" ></script>
+    <script type="text/javascript" src="../js/prop-types.js" ></script>
+
+    <script type="text/babel" >
+        class Demo extends React.Component{
+          render() {
+            console.log(this)
+            const { name,sex,age } = this.props;
+            // props 是只读的
+            // this.props.name = '小二'   // 此行代码报错，因为props是只读的
+            return (
+              <ul>
+                <li>姓名：{name}</li>
+                <li>性别：{sex}</li>
+                <li>年龄：{age + 1}</li>
+              </ul>
+            );
+          }
+        }
+        // 对标签属性进行 类型，必要性的限制
+        Demo.propTypes = {
+          name: PropTypes.string.isRequired,
+          sex: PropTypes.string,
+          age: PropTypes.number,
+          speak: PropTypes.func
+        }
+        // 指定默认标签属性值
+        Demo.defaultProps= {
+          sex: '不男不女',
+          age: 18
+        }
+        function speak() {
+          console.log('俺说话了')
+        }
+        ReactDOM.render(<Demo sex='女' age={18} speak={speak} />,document.getElementById('test'))
+        ReactDOM.render(<Demo name="小衫" />,document.getElementById('test1'))
+        const p = {name: '小王', sex:'男', age:16}
+        console.log('@', ...p)
+        ReactDOM.render(<Demo {...p} />,document.getElementById('test2'))
+    </script>
+</body>
+</html>

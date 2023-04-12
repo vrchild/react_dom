@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        class Demo extends React.Component {
+          state = {isHot: true}
+          showInfo = () => {
+            const {input} = this;
+            alert(input.value)
+          }
+          change = () => {
+            const {ishot} = this.state
+            this.setState({ishot: !ishot})
+          }
+          saveInput = (c) => {
+            this.input = c;
+            console.log(c)
+          }
+          render() {
+            const {ishot} = this.state
+            return (
+              <div>
+                <h1>今天天气很{ishot?'哇塞':'艹'}</h1>
+                {/*<input ref={c => {this.input = c; console.log(c)}} type="text" placeholder="请输入"/>
+                内联方式，更新时调用两次
+                类（class）绑定的方式，下面这种调用一次
+                */}
+                <input ref={this.saveInput} type="text" placeholder="请输入"/>
+                <button onClick={this.showInfo}>打我</button><br/><br/>
+                <button onClick={this.change}>搞我</button>
+              </div>
+            )
+          }
+        }
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+    </script>
+</body>
+</html>

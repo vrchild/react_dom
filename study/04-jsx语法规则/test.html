@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .title {
+            color: pink;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+<div id="test"></div>
+<!-- 引入react核心库 -->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!-- 引入react 扩展库 -->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>   <!-- 顺序不可以乱-->
+<!-- 将jsx翻译成js -->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+  const myId = 'tiTLe';
+  const content = 'heLLO，rEAct'
+  const VDOM = (
+    <div>
+      <h1 className="title" id={myId.toLowerCase()}>
+        <span style={{fontSize: '12px',color:'white'}}>{content.toLowerCase()}</span>
+      </h1>
+      <h1 className="title" id={myId.toUpperCase()}>
+        <span style={{fontSize: '12px',color:'white'}}>{content.toLowerCase()}</span>
+      </h1>
+      <input type="text"/>
+      <Good>你好</Good>
+    </div>
+  );
+  //渲染虚拟dom到页面
+  ReactDOM.render(VDOM, document.getElementById('test'));
+
+//  1.定义虚拟dom时，不要写引号''
+//  2.标签中混入js表达式时用花括号{}
+//  3.样式的类名指定不用class，用className
+//  4.内联样式要用style={{key:'value'}}的格式，小驼峰
+//  5.只有一个根标签
+//  6.标签必须闭合
+//  7.标签首字母
+//        （1）若小写字母开头，则将该标签转为html中同名元素，若无对应同名元素，则报错
+//        （2）若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错
+</script>
+</body>
+</html>

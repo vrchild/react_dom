@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        function Demo(data) {
+          const {name,sex,age} = data
+          return (
+            <ul>
+              <li>姓名：{name}</li>
+              <li>性别：{sex}</li>
+              <li>年龄：{age}</li>
+            </ul>
+          )
+        };
+        Demo.propTypes = {
+          name: PropTypes.string.isRequired
+        };
+        Demo.defaultProps = {
+          sex: '男',
+          age: '18'
+        }
+        ReactDOM.render(<Demo name="影流之主" />, document.getElementById('test'));
+    </script>
+</body>
+</html>

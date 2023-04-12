@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js" ></script>
+    <script type="text/javascript" src="../js/react-dom.development.js" ></script>
+    <script type="text/javascript" src="../js/babel.min.js" ></script>
+
+    <script type="text/babel" >
+        class Demo extends React.Component{
+          // 类中可以直接写赋值语句，如下代码的含义是： 给Student的实例对象添加一个属性
+          state = {isHot: true, wind: '微风'};
+          render() {
+            const { isHot, wind } = this.state
+            return <h1 onClick={this.newFun}>今天天气真的是{isHot? '受不鸟' : '受的鸟'},{wind}</h1>
+          }
+          //自定义方法： 要用赋值语句的形式 + 箭头函数
+          newFun = ()=> {
+            console.log(this)
+            const isHot = this.state.isHot;
+            this.setState({isHot: !isHot})
+          }
+        }
+        ReactDOM.render(<Demo/>, document.getElementById('test'))
+    </script>
+
+</body>
+</html>

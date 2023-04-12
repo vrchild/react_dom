@@ -1,0 +1,8 @@
+1. git branch 查看当前分支
+2. git branch -a 查看远程分支
+3. git branch dev_lyf 创建本地分支
+4. git checkout -b dev_lyf 创建本地分支并切换
+5. git push -u origin dev_lyf 推送到远程分支
+6. git add .
+7. git commit -m '描述'
+8. git push

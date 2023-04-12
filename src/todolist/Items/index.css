@@ -1,0 +1,15 @@
+.listBox {
+  border: 1px solid #00bfff;
+  border-bottom: none;
+}
+/* .listBox:not(:first-child) {
+  position: relative;
+  top: -1px;
+} */
+.checkBtn {
+  margin-top: 3px;
+  vertical-align: middle;
+}
+.lists {
+  vertical-align: middle;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/prop-types.js"></script>
+
+    <script type="text/babel">
+        class Sum extends React.Component{
+          constructor(props) {
+            super(props);
+            this.state = {sum: 0};
+            console.log('sum-constructor')
+          }
+          //挂载后
+          componentDidMount() {
+            console.log('sum-componentDidMount')
+          }
+          //销毁前
+          componentWillUnmount() {
+            console.log('sum-componentWillUnmount')
+          }
+          //控制组件更新的阀门
+          shouldComponentUpdate() {
+            console.log('sum-shouldComponentUpdate')
+            return true;     //必须返回一个boolean值
+          }
+          //组件更新后的钩子
+          componentDidUpdate(preProps,preState,snapshotValue) {
+            console.log('sum-componentDidUpdate',preProps,preState,snapshotValue)
+          }
+          //  使用情景基本没有  （若state的值在任何时间都取决于props,那么可以使用getDerivedStateFFromProps）
+          static getDerivedStateFromProps(props, state) {
+            console.log('sum-getDerivedStateFromProps',props,state)
+            return null
+            // return props
+          }
+          //更新之前获取快照
+          getSnapshotBeforeUpdate() {
+            console.log('sum-getSnapshotBeforeUpdate');
+            return 'big'
+          }
+          changeSum = () => {
+            let {sum} = this.state;
+            sum ++;
+            this.setState({sum})
+          }
+          unMount = () => {
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+          }
+          force = () => {
+            this.forceUpdate();
+          }
+          render() {
+            console.log('sum-render')
+            const {sum} = this.state
+            return (
+              <div>
+                <h1>计数和为：{sum}</h1>
+                <button onClick={this.changeSum}>+1</button>
+                <button onClick={this.unMount}>卸载组件</button>
+                <button onClick={this.force}>不改变state，强制更新</button>
+              </div>
+            )
+          }
+        }
+
+        class A extends React.Component{
+          state = {carName: '奥迪'}
+          changeCar = () => {
+            this.setState({carName: '奥拓'})
+          }
+          render() {
+            const {carName} = this.state
+            return (
+              <div>
+                <h1>A</h1>
+                <button onClick={this.changeCar}>换车</button>
+                <B carName={carName} />
+              </div>
+            )
+          }
+        }
+        class B extends React.Component {
+          UNSAFE_componentWillReceiveProps() {
+            console.log('B----componentWillReceiveProps')
+          }
+          render() {
+            console.log('B-render')
+            const {carName} = this.props
+            return (
+              <div>
+                <h1>B，这是父组件传来的{carName}</h1>
+              </div>
+            )
+          }
+        }
+        ReactDOM.render(<Sum sum={100} />, document.getElementById('test'))
+    </script>
+</body>
+</html>

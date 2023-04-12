@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js" ></script>
+    <script type="text/javascript" src="../js/react-dom.development.js" ></script>
+    <script type="text/javascript" src="../js/babel.min.js" ></script>
+
+    <script type="text/babel" >
+      // 1.创建组件
+        class Demo extends React.Component{
+          //构造器执行了几次？ ==== 执行了1次 --- 因为只new了一次
+          constructor(props) {
+            super(props);
+            // 初始化状态
+            this.state = {isHot: true, wind: '微风'};
+            this.newFun = this.fun.bind(this)   //bind 生成一个新的函数在原型对象自己身上
+          }
+          //render执行了几次？ === 1 + n次 -- 1是初始化的那次 / n是状态更新的次数
+          render() {
+            // 读取状态
+            const { isHot, wind } = this.state
+            console.log(this)
+            return <h1 onClick={this.newFun}>今天天气真的是{isHot? '受不鸟' : '受的鸟'},{wind}</h1>
+          }
+          //fun出发几次？ ==== 点击次调几次
+          fun() {
+            // fun放在哪里？ ====  Demo实例的原型对象上，供实例使用
+            // 通过Demo实例调用fun时，fun中的this就是Demo实例
+            // 由于fun是作为onClick的回调，所以不是通过实例调用，是直接调用
+            // 因为类中会默认开启严格模式，所以fun中的this指向了undefined
+            // console.log('点击了')
+            // console.log(this)
+
+            //获取原来的state的值
+            const isHot = this.state.isHot;
+            //严重注意，状态必须通过setState进行更新,且更新是一种合并，不是替换
+            this.setState({isHot: !isHot})
+            console.log(this.state.isHot)
+
+            //严重注意，state的值不能直接更改，下面这行就是直接更改
+            // this.state.isHot = !isHot;
+          }
+        }
+        ReactDOM.render(<Demo/>, document.getElementById('test'))
+    </script>
+
+</body>
+</html>

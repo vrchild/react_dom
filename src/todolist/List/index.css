@@ -1,0 +1,9 @@
+.box {
+  height: 70%;
+  overflow: auto;
+  width: 98%;
+  margin-left: 1%;
+}
+.box>div:last-child {
+  border-bottom: 1px solid #00bfff;
+}

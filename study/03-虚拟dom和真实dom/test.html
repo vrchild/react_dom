@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>   <!-- 顺序不可以乱-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+  const VDOM = (
+    <h1 id="title">
+      <span>hello,react</span>
+    </h1>
+  );
+  ReactDOM.render(VDOM, document.getElementById('test'));
+  console.log('虚拟dom', VDOM);
+  console.log('真实dom', document.getElementById('test'))
+//  本质是object类型的对象（一般对象）
+//  虚拟dom比较'轻'，真实dom比较'重'，因为虚拟dom在react内部使用，无需那么多属性
+//  虚拟dom最终会被react转化为真实dom，呈现在页面上
+</script>
+</body>
+</html>
